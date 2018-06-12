@@ -1,5 +1,5 @@
 <mat-card>
-  <form class="example-form" (submit)="savePost(postForm)" #postForm = "ngForm">
+  <form class="example-form" (submit)="createPost(postForm)" #postForm = "ngForm">
     <mat-form-field class="example-full-width">
       <input matInput placeholder="Post Title" ngModel name="postTitle" required #postTitle="ngModel">
       <mat-error *ngIf="postTitle.invalid">Post Title is required</mat-error>
@@ -10,7 +10,7 @@
       <mat-error *ngIf="postContent.invalid">Post Content is required</mat-error>
     </mat-form-field>
 
-    <button mat-raised-button color="warn" type="submit" >Save Post</button>
+    <button mat-raised-button color="warn" type="submit" [disabled]="postForm.invalid" [disableRipple]="postForm.invalid">Save Post</button>
   </form>
 
 <!--<p>{{ postTitle }}</p>-->

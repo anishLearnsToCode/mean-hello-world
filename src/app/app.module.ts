@@ -9,6 +9,8 @@ import { PostEditComponent } from './Posts/post-edit/post-edit.component';
 import { HeaderComponent } from './header/header.component';
 import { PostsListComponent } from './Posts/posts-list/posts-list.component';
 import { PostComponent } from './Posts/post/post.component';
+import {PostsService} from './Posts/Posts.service';
+import { PostCreateComponent } from './Posts/post-create/post-create.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { PostComponent } from './Posts/post/post.component';
     PostEditComponent,
     HeaderComponent,
     PostsListComponent,
-    PostComponent
+    PostComponent,
+    PostCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import { PostComponent } from './Posts/post/post.component';
     MatToolbarModule,
     MatExpansionModule
   ],
-  providers: [],
+  providers: [PostsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import {PostModel} from '../post.model';
 import {NgForm} from '@angular/forms';
+import {PostsService} from '../Posts.service';
 
 @Component({
   selector: 'app-post-edit',
@@ -14,10 +15,7 @@ export class PostEditComponent implements OnInit {
   errorMessage = '';
   @Output() postCreated = new EventEmitter<PostModel>();
 
-  constructor() {
-    // this.postTitle = 'Sample Title';
-    // this.postContent = 'Con';
-  }
+  constructor(public postsService: PostsService) { }
 
   savePost(post: NgForm) {
     if (post.value.postTitle.length === 0 && post.value.postContent.length === 0) {
@@ -27,6 +25,11 @@ export class PostEditComponent implements OnInit {
     this.errorMessage = '';
     const newPost = new PostModel(post.value.postTitle, post.value.postContent);
     this.postCreated.emit(newPost);
+  }
+
+  createPost(post: NgForm) {
+    this.postsService.addPost(new PostModel(post.value.postTitle, post.value.postContent));
+    post.resetForm();
   }
 
   ngOnInit() {
