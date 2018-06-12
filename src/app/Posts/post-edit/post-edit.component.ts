@@ -9,6 +9,10 @@ export class PostEditComponent implements OnInit {
 
   constructor() { }
 
+  editPost() {
+    alert('Post has been edited');
+  }
+
   ngOnInit() {
   }
 
