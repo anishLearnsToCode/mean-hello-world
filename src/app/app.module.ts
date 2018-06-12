@@ -7,12 +7,14 @@ import { FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { PostEditComponent } from './Posts/post-edit/post-edit.component';
 import { HeaderComponent } from './header/header.component';
+import { PostsListComponent } from './Posts/posts-list/posts-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostEditComponent,
-    HeaderComponent
+    HeaderComponent,
+    PostsListComponent
   ],
   imports: [
     BrowserModule,
