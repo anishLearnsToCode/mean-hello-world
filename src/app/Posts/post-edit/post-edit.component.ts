@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import {PostModel} from '../post.model';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-post-edit',
@@ -18,13 +19,13 @@ export class PostEditComponent implements OnInit {
     // this.postContent = 'Con';
   }
 
-  savePost() {
-    if (this.postTitle.length === 0 && this.postContent.length === 0) {
+  savePost(post: NgForm) {
+    if (post.value.postTitle.length === 0 && post.value.postContent.length === 0) {
       this.errorMessage = 'Empty Posts cannot be created';
       return;
     }
     this.errorMessage = '';
-    const newPost = new PostModel(this.postTitle, this.postContent);
+    const newPost = new PostModel(post.value.postTitle, post.value.postContent);
     this.postCreated.emit(newPost);
   }
 
