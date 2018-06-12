@@ -2,6 +2,6 @@
 <app-header></app-header>
 
 <div class="container">
-  <app-post-edit></app-post-edit>
-  <app-posts-list></app-posts-list>
+  <app-post-edit (postCreated)="onNewPostCreated($event)"></app-post-edit>
+  <app-posts-list [posts]="posts"></app-posts-list>
 </div>

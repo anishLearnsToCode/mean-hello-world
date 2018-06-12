@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import {PostModel} from '../post.model';
 
 @Component({
   selector: 'app-post-edit',
@@ -7,10 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostEditComponent implements OnInit {
 
-  constructor() { }
+  postTitle = '';
+  postContent = '';
+  errorMessage = '';
+  @Output() postCreated = new EventEmitter<PostModel>();
 
-  editPost() {
-    alert('Post has been edited');
+  constructor() {
+    // this.postTitle = 'Sample Title';
+    // this.postContent = 'Con';
+  }
+
+  savePost() {
+    if (this.postTitle.length === 0 && this.postContent.length === 0) {
+      this.errorMessage = 'Empty Posts cannot be created';
+      return;
+    }
+    this.errorMessage = '';
+    const newPost = new PostModel(this.postTitle, this.postContent);
+    this.postCreated.emit(newPost);
   }
 
   ngOnInit() {

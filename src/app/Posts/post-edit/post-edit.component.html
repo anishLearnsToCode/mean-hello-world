@@ -1,13 +1,17 @@
 <mat-card>
   <form class="example-form">
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Favorite food" value="Sushi">
+      <input matInput placeholder="Post Title" ngModel name="postTitle">
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Leave a comment"></textarea>
+      <textarea matInput placeholder="Post Content" ngModel name="postContent" rows="2"></textarea>
     </mat-form-field>
 
-    <button mat-raised-button color="warn" type="button" (click)="editPost()">Edit Post</button>
+    <button mat-raised-button color="warn" type="button" (click)="savePost()">Save Post</button>
   </form>
+  <p>{{ errorMessage }}</p>
 </mat-card>
+
+<!--<p>{{ postTitle }}</p>-->
+<!--<p>{{ postContent }}</p>-->
