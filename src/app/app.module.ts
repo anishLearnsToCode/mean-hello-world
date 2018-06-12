@@ -9,13 +9,15 @@ import { PostEditComponent } from './Posts/post-edit/post-edit.component';
 import { HeaderComponent } from './header/header.component';
 import { PostsListComponent } from './Posts/posts-list/posts-list.component';
 import {MatExpansionModule} from '@angular/material';
+import { PostComponent } from './Posts/post/post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostEditComponent,
     HeaderComponent,
-    PostsListComponent
+    PostsListComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
