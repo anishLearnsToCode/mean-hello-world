@@ -14,14 +14,14 @@ export class PostsListComponent implements OnInit, OnDestroy {
   private postsSubscription: Subscription;
 
   @Input() posts: PostModel[] = [
-    new PostModel('Title Heading', 'this is the sample text'),
-    new PostModel('Heading 2', 'This content is amazing')
+    new PostModel(null, 'Title Heading', 'this is the sample text'),
+    new PostModel(null, 'Heading 2', 'This content is amazing')
   ];
 
   constructor(public postsService: PostsService) { }
 
   ngOnInit() {
-    this.posts = this.postsService.getPosts();
+    this.postsService.getPosts();
     this.postsSubscription = this.postsService.getPostUpdateListener().subscribe(
       (posts: PostModel[]) => {
         this.posts = posts;

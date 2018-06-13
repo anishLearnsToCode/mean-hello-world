@@ -23,12 +23,12 @@ export class PostEditComponent implements OnInit {
       return;
     }
     this.errorMessage = '';
-    const newPost = new PostModel(post.value.postTitle, post.value.postContent);
+    const newPost = new PostModel(null, post.value.postTitle, post.value.postContent);
     this.postCreated.emit(newPost);
   }
 
   createPost(post: NgForm) {
-    this.postsService.addPost(new PostModel(post.value.postTitle, post.value.postContent));
+    this.postsService.addPost(new PostModel(null, post.value.postTitle, post.value.postContent));
     post.resetForm();
   }
 
