@@ -2,6 +2,9 @@
 
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
 
 app.use((request, response, next) => {
   response.setHeader("Access-Control-Allow-Origin", "*");
@@ -12,8 +15,8 @@ app.use((request, response, next) => {
 });
 
 app.post('/api/posts', (request, response, next) => {
-
-})
+  console.log();
+});
 
 app.use('/api/posts', (request, response, next) => {
   const posts = [
