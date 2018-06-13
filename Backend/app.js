@@ -4,7 +4,8 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json()); This method can be used, if we add the body-parser npm library
+app.use(express.json());      // This method can be used directly after adding express, no need of body-parser library (Better)
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use((request, response, next) => {
