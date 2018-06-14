@@ -4,11 +4,13 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
+const Post = require('./models/post');
+
 const mongoDbUserName = 'anish';
 const mongoDbUserPassword = 'q0oDoGuQ1EQrb2jM';
 
-// app.use(bodyParser.json()); This method can be used, if we add the body-parser npm library
-app.use(express.json());      // This method can be used directly after adding express, no need of body-parser library (Better)
+app.use(bodyParser.json()); // This method can be used, if we add the body-parser npm library
+// app.use(express.json());      // This method can be used directly after adding express, no need of body-parser library (Better)
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use((request, response, next) => {
@@ -22,7 +24,6 @@ app.use((request, response, next) => {
 app.post('/api/posts', (request, response, next) => {
   const post = request.body;
   console.log(post);
-  console.log(request.head);
   response.status(201).json({
     message: 'Post Added Successfully'
   });
