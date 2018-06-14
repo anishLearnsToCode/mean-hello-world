@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-const Post = require('./models/post');
+const PostModel = require('./models/post');
 
 const mongoDbUserName = 'anish';
 const mongoDbUserPassword = 'q0oDoGuQ1EQrb2jM';
@@ -23,6 +23,10 @@ app.use((request, response, next) => {
 
 app.post('/api/posts', (request, response, next) => {
   const post = request.body;
+  const newPost = new PostModel({
+    postTitle: 'random',
+    postContent: 'random'
+  });
   console.log(post);
   response.status(201).json({
     message: 'Post Added Successfully'

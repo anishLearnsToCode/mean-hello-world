@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const postSchema = mongoose.Schema({
   postTitle: {type: String, required: true},
-  postContent: {type: String, required: true}
+  postContent: {type: String}
 });
 
-module.export = mongoose.model('Post', postSchema);
+module.exports = mongoose.model('PostModel', postSchema);
