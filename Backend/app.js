@@ -49,7 +49,8 @@ app.get('/api/posts', (request, response, next) => {
     {postId: 2344, postTitle: 'Woohoo', postContent: 'amazing!!'}
   ];
   const idealPosts = [
-    {_id: 1545, postTitle: 'title', postContent: 'post content'}
+    {_id: 1545, postTitle: 'title', postContent: 'post content'},
+    {postId: '676fgf', postTitle: 'This is title', postContent: 'This is da content'}
   ];
   PostModel.find().then(documents => {
     console.log(documents);
