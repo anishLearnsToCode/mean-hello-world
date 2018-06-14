@@ -49,14 +49,20 @@ app.get('/api/posts', (request, response, next) => {
     {postId: 2344, postTitle: 'Woohoo', postContent: 'amazing!!'}
   ];
   const idealPosts = [
-    {_id: 1545, postTitle: 'title', postContent: 'post content'},
-    {postId: '676fgf', postTitle: 'This is title', postContent: 'This is da content'}
+    {_id: '67989', postTitle: 'title', postContent: 'post content'},
+    {_id: '676fgf', postTitle: 'This is title', postContent: 'This is da content'}
   ];
   PostModel.find().then(documents => {
     console.log(documents);
     response.status(200).json({
       message: 'Posts fetched successfully',
-      posts: idealPosts
+      posts: idealPosts.map(post => {
+        return {
+          postTitle: post.postTitle,
+          postContent: post.postContent,
+          postID: post._id
+        }
+      })
     })
   });
   // response.status(200).json({

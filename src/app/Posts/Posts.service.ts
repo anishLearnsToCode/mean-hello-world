@@ -15,7 +15,9 @@ export class PostsService {
   getPosts() {
     this.HttpClientServer.get<{message: string, posts: PostModel[]}>(this.serverAddress + 'posts')
       .subscribe((postData) => {
+        console.log(postData);
         this.posts = postData.posts;
+        console.log(this.posts);
         this.postsUpdated.next([...this.posts]);
       });
   }
