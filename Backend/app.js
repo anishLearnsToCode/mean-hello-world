@@ -18,16 +18,22 @@ mongoose.connect('mongodb+srv://' + mongoDbUserName + ':' + mongoDbUserPassword 
 
 const PostModel = require('./models/post');
 
+app.use((request, response, next) => {
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  response.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PATCH, OPTIONS");
+  next();
+});
+
 app.use(bodyParser.json()); // This method can be used, if we add the body-parser npm library
 // app.use(express.json());      // This method can be used directly after adding express, no need of body-parser library (Better)
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use((request, response, next) => {
-  response.setHeader("Access-Control-Allow-Origin", "*");
-  response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-Width, Content-Type, Accept");
-  response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PATCH, OPTIONS");
-  next();
-});
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 app.post('/api/posts', (request, response, next) => {
   const newPost = new PostModel({
@@ -36,7 +42,8 @@ app.post('/api/posts', (request, response, next) => {
   });
   newPost.save();
   response.status(201).json({
-    message: 'Post Added Successfully'
+    postTitle: request.body.postTitle,
+    postContent: request.body.postContent
   });
 });
 
@@ -52,7 +59,6 @@ app.get('/api/posts', (request, response, next) => {
     {_id: '676fgf', postTitle: 'This is title', postContent: 'This is da content'}
   ];
   PostModel.find().then(documents => {
-    console.log(documents);
     response.status(200).json({
       message: 'Posts fetched successfully',
       posts: documents.map(post => {

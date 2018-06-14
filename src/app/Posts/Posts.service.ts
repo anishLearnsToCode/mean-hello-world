@@ -32,6 +32,7 @@ export class PostsService {
   }
 
   deletePost(postID: string) {
+    console.log('Sending request to express app to delete post with PostID: ' + postID);
     this.HttpClientServer.delete(this.serverAddress + 'posts/' + postID)
       .subscribe(() => {
         console.log('Post Deleted');
