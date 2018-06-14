@@ -1,7 +1,8 @@
-import {PostModel} from './post.model';
-import {Injectable} from '@angular/core';
+import { PostModel } from './post.model';
+import { Injectable } from '@angular/core';
 import { Subject} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class PostsService {

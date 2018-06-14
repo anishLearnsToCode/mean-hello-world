@@ -2,12 +2,21 @@
 
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 
-const PostModel = require('./models/post');
+const bodyParser = require('body-parser');
 
 const mongoDbUserName = 'anish';
 const mongoDbUserPassword = 'q0oDoGuQ1EQrb2jM';
+const mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://' + mongoDbUserName + ':' + mongoDbUserPassword + '@mean-first-mongo-domoi.mongodb.net/test?retryWrites=true')
+  .then(() => {
+    console.log('Connected To The DataBase');
+  })
+  .catch(() => {
+    console.log('Connection Failed');
+  });
+
+const PostModel = require('./models/post');
 
 app.use(bodyParser.json()); // This method can be used, if we add the body-parser npm library
 // app.use(express.json());      // This method can be used directly after adding express, no need of body-parser library (Better)
@@ -22,12 +31,11 @@ app.use((request, response, next) => {
 });
 
 app.post('/api/posts', (request, response, next) => {
-  const post = request.body;
   const newPost = new PostModel({
-    postTitle: 'random',
-    postContent: 'random'
+    postTitle: request.body.postTitle,
+    postContent: request.body.postContent
   });
-  console.log(post);
+  console.log(newPost);
   response.status(201).json({
     message: 'Post Added Successfully'
   });
@@ -40,10 +48,20 @@ app.get('/api/posts', (request, response, next) => {
     {postId: 2344, postTitle: 'Woohoo', postContent: 'amazing!!'},
     {postId: 2344, postTitle: 'Woohoo', postContent: 'amazing!!'}
   ];
-  response.status(200).json({
-    message: 'Posts Fetched Successfully',
-    posts: posts
+  const idealPosts = [
+    {_id: 1545, postTitle: 'title', postContent: 'post content'}
+  ];
+  PostModel.find().then(documents => {
+    console.log(documents);
+    response.status(200).json({
+      message: 'Posts fetched successfully',
+      posts: idealPosts
+    })
   });
+  // response.status(200).json({
+  //   message: 'Posts Fetched Successfully',
+  //   posts: posts
+  // });
 });
 
 module.exports = app;
