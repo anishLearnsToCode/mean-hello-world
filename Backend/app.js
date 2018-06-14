@@ -4,6 +4,9 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
+const mongoDbUserName = 'anish';
+const mongoDbUserPassword = 'q0oDoGuQ1EQrb2jM';
+
 // app.use(bodyParser.json()); This method can be used, if we add the body-parser npm library
 app.use(express.json());      // This method can be used directly after adding express, no need of body-parser library (Better)
 app.use(bodyParser.urlencoded({extended: false}));
