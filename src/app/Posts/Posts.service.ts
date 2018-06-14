@@ -31,6 +31,13 @@ export class PostsService {
       });
   }
 
+  deletePost(postID: string) {
+    this.HttpClientServer.delete(this.serverAddress + 'posts/' + postID)
+      .subscribe(() => {
+        console.log('Post Deleted');
+      });
+  }
+
   getPostUpdateListener() {
     return this.postsUpdated.asObservable();
   }

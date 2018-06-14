@@ -25,8 +25,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use((request, response, next) => {
   response.setHeader("Access-Control-Allow-Origin", "*");
   response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-Width, Content-Type, Accept");
-  response.setHeader("Access-Control-Allow-Methods",
-    "GET, POST, DELETE, PATCH, OPTIONS");
+  response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PATCH, OPTIONS");
   next();
 });
 
@@ -35,7 +34,7 @@ app.post('/api/posts', (request, response, next) => {
     postTitle: request.body.postTitle,
     postContent: request.body.postContent
   });
-  console.log(newPost);
+  newPost.save();
   response.status(201).json({
     message: 'Post Added Successfully'
   });
@@ -56,7 +55,7 @@ app.get('/api/posts', (request, response, next) => {
     console.log(documents);
     response.status(200).json({
       message: 'Posts fetched successfully',
-      posts: idealPosts.map(post => {
+      posts: documents.map(post => {
         return {
           postTitle: post.postTitle,
           postContent: post.postContent,
@@ -69,6 +68,13 @@ app.get('/api/posts', (request, response, next) => {
   //   message: 'Posts Fetched Successfully',
   //   posts: posts
   // });
+});
+
+app.delete('api/posts/:postID', (request, response, next) => {
+  console.log(request.params.postID);
+  response.status(200).json({
+    message: 'Post has been deleted'
+  });
 });
 
 module.exports = app;
