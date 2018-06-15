@@ -24,7 +24,7 @@ export class PostsService {
   addPost(post: PostModel) {
     this.HttpClientServer.post<{message: string, postID: string}>(this.serverAddress + 'posts', post)
       .subscribe((responseData) => {
-        console.log(responseData);
+        console.log(responseData.postID);
         this.posts.push(new PostModel(responseData.postID, post.postTitle, post.postContent));
         this.postsUpdated.next([...this.posts]);
       });
@@ -36,6 +36,7 @@ export class PostsService {
       .subscribe((responseData) => {
         console.log(responseData.deleted);
         if (responseData.deleted) {
+          this.getPosts();
         }
       });
   }
