@@ -36,7 +36,9 @@ export class PostsService {
       .subscribe((responseData) => {
         console.log(responseData.deleted);
         if (responseData.deleted) {
-          this.getPosts();
+          const updatedPosts = this.posts.filter(post => post.postID !== postID);
+          this.posts = updatedPosts;
+          this.postsUpdated.next([...this.posts]);
         }
       });
   }
