@@ -67,7 +67,13 @@ app.get("/api/posts", (req, res, next) => {
   Post.find().then(documents => {
     res.status(200).json({
       message: "Posts fetched successfully!",
-      posts: documents
+      posts: documents.map((post) => {
+        return {
+          postTitle: post.postTitle,
+          postContent:post.postContent,
+          postID: post._id
+        }
+      })
     });
   });
 });
