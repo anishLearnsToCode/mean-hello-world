@@ -51,8 +51,8 @@ app.use((req, res, next) => {
 
 app.post("/api/posts", (req, res, next) => {
   const post = new Post({
-    title: req.body.title,
-    content: req.body.content
+    postTitle: req.body.postTitle,
+    postContent: req.body.postContent
   });
   post.save().then(createdPost => {
     res.status(201).json({
@@ -81,8 +81,9 @@ app.get("/api/posts", (req, res, next) => {
 app.delete("/api/posts/:id", (req, res, next) => {
   console.log('DELETE method in api/posts');
   Post.deleteOne({ _id: req.params.id }).then(result => {
-    console.log(result);
-    res.status(200).json({ message: "Post deleted!" });
+    res.status(200).json({
+      deleted: result.ok == 1
+    });
   });
 });
 
